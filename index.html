@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <script src="https://kit.fontawesome.com/650e97f0c1.js" crossorigin="anonymous"></script>
+  <title>Blitzeblank Gebäudemanagement</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .nav {
+      height: 75px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 0.5px solid #1e214e;
+      background-color: #fff;
+      position: fixed;
+      z-index: 3000;
+    }
+
+    .nav .logo,
+    .logo a {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90%;
+      left: 1em;
+      cursor: pointer;
+      margin-right: 1em;
+    }
+
+    .logo img {
+      max-height: 90%;
+    }
+
+    .nav .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex: 0 0 auto;
+    }
+
+    .nav .item a {
+      margin: 0 10px;
+      transition: color 0.3s ease-in-out;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .nav .item a:visited {
+      color: #000;
+    }
+
+    .nav .item a:hover {
+      cursor: pointer;
+      color: #38b6ff;
+    }
+
+    .nav .buchen {
+      display: flex;
+      align-items: center;
+      width: 100px;
+      margin: 0 1em;
+    }
+
+    .buchen #buchenbtn {
+      width: 100%;
+      font-size: 15px;
+      text-transform: none;
+      color: #fff;
+      padding: 0.5em 1.5em;
+      gap: 10px;
+      border: none;
+      border-radius: 2em;
+      background: #004aad;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+      margin: 0 5px;
+    }
+
+    .buchen #buchenbtn:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+      background-color: #38b6ff;
+    }
+
+    /* The Overlay (background) */
+    .overlay {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow-x: hidden;
+      transition: 0.5s;
+    }
+
+    /* Position the content inside the overlay */
+    .overlay-content {
+      position: relative;
+      top: 25%;
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    /* The navigation links inside the overlay */
+    .overlay a {
+      padding: 8px;
+      text-decoration: none;
+      font-size: 36px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .overlay a:hover,
+    .overlay a:focus {
+      color: #f1f1f1;
+    }
+
+    /* Position the close button (top right corner) */
+    .overlay .closebtn {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      font-size: 60px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .overlay a {
+        font-size: 20px;
+      }
+
+      .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+      }
+    }
+
+    .nav .moindeux {
+      display: none;
+    }
+
+    .nav .moindeux:hover {
+      cursor: pointer;
+    }
+
+    .home {
+      width: 100%;
+      height: 100%;
+      background-image: url('Images/11062b_cbd10367d7414862bb3b683f3556a41b~mv2.jpeg');
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .home .heading {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      z-index: 300;
+      padding: 5em 3em;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 25px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(11.7px);
+      -webkit-backdrop-filter: blur(11.7px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .heading h1 {
+      margin: 0;
+      font-size: 50px;
+      font-weight: 500;
+      color: #1E214E;
+    }
+
+    .heading .geb {
+      margin: 0;
+      font-size: 40px;
+      font-weight: 500;
+      color: #1E214E;
+    }
+
+    .heading p {
+      margin: 1em 0;
+      font-style: italic;
+      font-size: 24px;
+      color: #004aad;
+    }
+
+    .st {
+      width: 100%;
+      height: fit-content;
+      padding: 50px 0;
+      background: rgba(86, 101, 178, 0.1);
+    }
+
+    .st-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .st-section .st-cards {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 300px;
+      height: 300px;
+      margin: 0 30px 60px;
+      border-radius: 20%;
+      background: #FFF;
+      box-shadow: 0px 4px 24px 0px rgba(139, 167, 178, 0.16);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .st-section .st-cards:hover {
+      transform: translateY(-10px);
+    }
+
+    .st-cards i {
+      margin-top: 50px;
+      font-size: 45px;
+      color: rgba(86, 101, 178, 0.7);
+    }
+
+    .st-cards .stst {
+      position: relative;
+      bottom: 30px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 0 1em;
+    }
+
+    .st-cards h2 {
+      color: rgba(86, 101, 178, 0.7);
+    }
+
+    .st-cards h4 {
+      position: relative;
+      bottom: 25px;
+      padding: 0 5px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .products {
+      width: 100%;
+      padding: 50px 0;
+    }
+
+    .products-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .products-title h2 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .products-title p {
+      font-size: 1rem;
+      color: #5E6E89;
+    }
+
+    .products-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .products-row {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 4em;
+    }
+
+    .products-item {
+      background-color: #F0F0F0;
+      width: 230px;
+      height: 200px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 24px 0px rgba(123, 123, 123, 0.15);
+      text-align: center;
+      margin-right: 30px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .products-item:hover {
+      transform: translateY(-10px);
+      cursor: pointer;
+    }
+
+    .products-item:last-child {
+      margin-right: 0;
+    }
+
+    .products-item img {
+      max-width: 100%;
+      height: 150px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      object-fit: cover;
+    }
+
+    .products .description {
+      width: 250px;
+      height: 70px;
+      background-color: #fff;
+      position: relative;
+      top: -26px;
+      border-radius: 0 0 10px 10px;
+      text-decoration: none;
+    }
+
+    .products-item h3 {
+      margin-top: 10px;
+      padding-top: 10px;
+      padding-left: 10px;
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: flex-start;
+      color: #1D293F;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .benefits {
+      width: 100%;
+      height: fit-content;
+      padding: 50px 0;
+      background: #F7F8FA;
+    }
+
+    .text-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+
+    .text-left h2 {
+      font-size: 40px;
+      font-weight: 500;
+      color: #1D293F;
+      margin-bottom: 20px;
+    }
+
+    .text-left .ul {
+      width: 60%;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+      color: #1E214E;
+    }
+
+    .text-left button {
+      font-size: 15px;
+      margin: 20px 0 40px;
+      color: #fff;
+      padding: 8px 44px;
+      gap: 10px;
+      border: none;
+      border-radius: 20px;
+      background: #38b6ff;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .text-left button:hover {
+      transition: background-color 0.3s ease-in-out;
+      background: #004aad;
+      cursor: pointer;
+    }
+
+
+    .review {
+      position: relative;
+      width: 100%;
+      height: fit-content;
+      padding: 50px 0;
+      background: rgba(86, 178, 178, 0.2);
+    }
+
+    .review-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .review-title h2 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #0B254B;
+    }
+
+    .review-title p {
+      font-size: 1rem;
+      color: #5E6E89;
+    }
+
+    .review-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .review-section .cards {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 350px;
+      height: 295px;
+      margin-right: 50px;
+      margin-bottom: 70px;
+      border-radius: 6px;
+      background: #FFF;
+      box-shadow: 0px 4px 24px 0px rgba(139, 167, 178, 0.16);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .review-section .cards:hover {
+      transform: translateY(-10px);
+    }
+
+    .cards img {
+      margin-top: 20px;
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: #F7F8FA;
+      box-shadow: 0px 3.36px 20.16px 0px rgba(139, 167, 178, 0.16);
+      object-fit: cover;
+    }
+
+    .stars {
+      display: flex;
+    }
+
+    .fa-star {
+      margin-top: 15px;
+      margin-right: 5px;
+    }
+
+    .checked {
+      color: #38b6ff;
+    }
+
+    .cards h4 {
+      margin-bottom: auto;
+      padding: 40px 11px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .footer {
+      background-color: #222222;
+      color: #fff;
+      height: fit-content;
+      padding: 40px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-content a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .footer-info {
+      text-align: end;
+    }
+
+    .footer-info p {
+      margin: 10px 0;
+    }
+
+    @media screen and (max-width: 1200px) {
+      .st-cards .stst {
+        position: relative;
+        bottom: 30px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 1em;
+      }
+
+      .st-cards h4 {
+        position: relative;
+        bottom: 25px;
+        padding: 0 1em;
+        text-align: center;
+        font-size: 13px;
+      }
+
+    }
+
+    @media screen and (max-width: 1024px) {
+      .st-section .st-cards {
+        height: 310px;
+      }
+
+      .st-cards i {
+        margin-top: 40px;
+        font-size: 35px;
+      }
+
+      .products-item img {
+        width: 100%;
+      }
+
+      .products .description {
+        width: 100%;
+        height: 70px;
+        background-color: #fff;
+        position: relative;
+        top: -26px;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .products-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        row-gap: 0px;
+        margin-bottom: 0;
+      }
+
+      .products-item {
+        margin-right: 0;
+        margin-bottom: 50px;
+        width: 90%;
+      }
+    }
+
+    @media screen and (max-width: 929px) {
+
+      .st-section {
+        flex-wrap: wrap;
+      }
+
+      .st-section .st-cards {
+        width: 250px;
+        height: 250px;
+        margin: 0 30px 60px;
+      }
+
+      .st-cards i {
+        margin-top: 20px;
+        font-size: 40px;
+      }
+
+      .st-cards h2 {
+        font-size: 20px;
+      }
+
+      .st-cards .stst {
+        font-size: 13px;
+        padding: 0 1em 3em;
+      }
+
+      .review {
+        height: 1200px;
+      }
+
+      .review-section {
+        display: grid;
+        grid-template-columns: repeat(1fr);
+        justify-items: center;
+        row-gap: 20px;
+        margin-bottom: 0;
+      }
+
+      .review-section .cards {
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 90%;
+      }
+
+      .benefits .text-left {
+        text-align: center;
+        left: 0;
+        padding: 2em;
+      }
+
+      .text-left .ul {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        color: #1E214E;
+        padding-right: 0px;
+      }
+
+    }
+
+    @media screen and (max-width: 770px) {
+
+      .nav .item,
+      .nav #buchenbtn {
+        display: none;
+      }
+
+      .nav .moindeux {
+        display: inline-block;
+      }
+
+      .heading .geb {
+        font-size: 30px;
+      }
+
+      .heading p {
+        font-size: 20px;
+      }
+
+    }
+
+    @media screen and (max-width: 619px) {
+
+      .st-section .st-cards {
+        width: 300px;
+        height: 300px;
+        margin-top: 0;
+        margin-bottom: 40px;
+      }
+
+      .st-cards i {
+        margin-top: 20px;
+        font-size: 30px;
+      }
+
+      .st-cards h2 {
+        font-size: 25px;
+      }
+
+      .st-cards .stst {
+        font-size: 15px;
+        padding: 1.5em;
+      }
+
+      .st-cards h4 {
+        font-size: 17px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .footer-logo {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-logo h2 {
+        margin: 0;
+      }
+
+      .footer-logo h4 {
+        margin: 5px 0;
+      }
+
+      .footer-info {
+        text-align: center;
+      }
+    }
+
+    @media screen and (max-width: 550px) {
+      .heading h1 {
+        font-size: 32px;
+      }
+
+      .heading .geb {
+        font-size: 22px;
+      }
+
+    }
+
+    @media screen and (max-width: 425px) {
+      .products-item h3 {
+        font-size: 13px;
+      }
+    }
+
+    @media screen and (max-width: 375px) {
+      .heading h1 {
+        font-size: 28px;
+      }
+
+      .heading .geb {
+        font-size: 18px;
+      }
+
+      .heading p {
+        font-size: 18px;
+      }
+    }
+
+    @media screen and (max-width: 340px) {
+      .products-item .description h3 {
+      margin-top: 10px;
+      padding-top: 10px;
+      padding-left: 10px;
+      font-size: 10px;
+      display: flex;
+      flex-direction: flex-start;
+      color: #1D293F;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="logo">
+        <a href="index.html">
+          <img src="Images/1.png" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="index.html" class="nav-discovery">Services</a>
+        <a href="uberuns.html" class="nav-about">Über Uns</a>
+        <a href="kontakt.html" class="contact-link">Kontakt</a>
+      </div>
+      <div class="buchen">
+        <button id="buchenbtn">Buchen</button>
+      </div>
+      <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+          <a href="index.html" class="services-ov">Services</a>
+          <a href="uberuns.html">Über Uns</a>
+          <a href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+      <div class="moindeux">
+        <span onclick="openNav()" style="margin-right: 20px"><i class="fas fa-bars"></i></span>
+      </div>
+    </div>
+    <div class="home">
+      <div class="heading">
+        <h1>Blitzeblank</h1>
+        <h2 class="geb">Gebäudemanagement</h2>
+        <p>Ihr zuverlässiger Partner Rund um die Reinigung!</p>
+      </div>
+    </div>
+    <div class="st">
+      <div class="st-section">
+        <div class="st-cards">
+          <i class="fa-solid fa-people-group"></i>
+          <h2>Individuell</h2>
+          <h4 class="stst">Unsere Angebotspalette an Reinigungsdienstleistungen wird ständig den wachsenden
+            Anforderungen und individuellen Bedürfnissen unserer Kunden angepasst</h4>
+        </div>
+        <div class="st-cards">
+          <i class="fa-solid fa-user"></i>
+          <h2>Persönlich</h2>
+          <h4>Sie haben rund um die Uhr einen festen Ansprechpartner und fest zugewiesene Reinigungsteams</h4>
+        </div>
+        <div class="st-cards">
+          <i class="fa-solid fa-spray-can-sparkles"></i>
+          <h2>Effizient</h2>
+          <h4>Wir garantieren eine effiziente Sauberkeit immer und überall</h4>
+        </div>
+        <div class="st-cards">
+          <i class="fa-solid fa-thumbs-up"></i>
+          <h2>Zuverlässig</h2>
+          <h4>Wir bieten zu jeden Fall eine zuverlässige Reinigung</h4>
+        </div>
+      </div>
+    </div>
+    <div class="products" id="products">
+      <div class="products-title">
+        <h2>Services</h2>
+        <p>Im Überblick</p>
+      </div>
+      <div class="products-container">
+        <div class="products-row">
+          <div class="products-item">
+            <a href="buro.html">
+              <img src="Images/Buroreinigung.jpg" />
+              <div class="description">
+                <h3>Büroreinigung</h3>
+              </div>
+            </a>
+          </div>
+          <div class="products-item">
+            <a href="glas.html">
+              <img src="Images/Glasreinigung.jpg" />
+              <div class="description">
+                <h3>Glasreinigung</h3>
+              </div>
+            </a>
+          </div>
+          <div class="products-item">
+            <a href="laden.html">
+              <img src="Images/Ladenreinigung.jpg" />
+              <div class="description">
+                <h3>Ladenreinigung</h3>
+              </div>
+            </a>
+          </div>
+          <div class="products-item">
+            <a href="schule.html">
+              <img src="Images/11062b_5e3deeedaf1941d397acd6eb6bca515e~mv2.jpg.webp" />
+              <div class="description">
+                <h3>Schul- und Kindergartenreinigung</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="products-row">
+          <div class="products-item">
+            <a href="baureinigung.html">
+              <img src="Images/11062b_e2762bd4791446149b608cb87f8f90fb~mv2.jpeg.webp" />
+              <div class="description">
+                <h3>Bauendreinigung</h3>
+              </div>
+            </a>
+          </div>
+          <div class="products-item">
+            <a href="hausmeister.html">
+              <img src="Images/Hausmeister.jpg" />
+              <div class="description">
+                <h3>Hausmeisterservice</h3>
+              </div>
+            </a>
+          </div>
+          <div class="products-item">
+            <a href="studio.html">
+              <img src="Images/Studioreinigung.jpg" />
+              <div class="description">
+                <h3>Studioreinigung</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="text-left">
+        <h2>Individuelle Anfragen</h2>
+        <p class="ul">
+          Unser Gebäudereinigungsunternehmen geht gerne auf Ihre individuelle
+          Kundenanfragen ein, um maßgeschneiderte Reinigungslösungen zu
+          entwickeln. Wir arbeiten eng mit unseren Kunden zusammen, um Ihre
+          Bedürfnisse bestmöglich zu erfüllen. Kontaktieren Sie uns um Ihre
+          individuelle Anfragen zu besprechen und profitieren Sie jetzt von
+          unserem Know-how!
+        </p>
+        <button onclick="window.location.href='kontakt.html';">Jetzt Anfragen</button>
+      </div>
+    </div>
+    <!--
+            <div class="review">
+      <div class="review-title">
+        <h2>Rezensionen</h2>
+        <p>Bewertungen von unseren Kunden!</p>
+      </div>
+      <div class="review-section">
+        <div class="cards">
+          <img src="Images/Heading/Profile_-_Anakin_Skywalker.webp" />
+          <div class="stars">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+          </div>
+          <h4>"Lorem Ipsum"</h4>
+        </div>
+        <div class="cards">
+          <img src="Images" />
+          <div class="stars">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+          </div>
+          <h4>"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+            et dolore magna aliquyam erat, sed diam voluptua."</h4>
+        </div>
+        <div class="cards">
+          <img src="Images/Heading/waltersconfession.jpg" />
+          <div class="stars">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+          </div>
+          <h4>"Lorem ipsum "</h4>
+        </div>
+      </div>
+    </div>
+    -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>Blitzeblank</h2>
+          <h4>Gebäudemanagement</h4>
+        </div>
+        <div class="footer-info">
+          <p><a href="datenschutz.html">Datenschutz</a></p>
+          <p><a href="impressum.html">Impressum</a></p>
+          <p><i class="fas fa-envelope"></i> info@blitzeblank-reinigung.de</p>
+          <p><i class="fas fa-phone"></i> +49 179 4267770</p>
+          <p><a href="#"><i class="fab fa-instagram"></i> @blitzeblank-gebaudeservice</a></p>
+          <p>&copy; 2024 Blitzeblank Gebäudemanagement. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const servicesLink = document.querySelector(".nav-discovery");
+      const productsSection = document.querySelector("#products");
+      const bueroLink = document.getElementById("buero-link");
+      const button = document.getElementById('buchenbtn');
+      const servicesOverlay = document.querySelector(".services-ov");
+
+      button.addEventListener('click', function () {
+        window.location.href = 'kontakt.html';
+      });
+
+      servicesLink.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        productsSection.scrollIntoView({
+          behavior: "smooth"
+        });
+      });
+
+      servicesOverlay.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        productsSection.scrollIntoView({
+          behavior: "smooth"
+        });
+
+        closeNav();
+      });
+
+      bueroLink.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        window.location.href = bueroLink.getAttribute("href");
+      });
+    });
+  </script>
+  <script src="service.js"></script>
+</body>
+
+</html>
