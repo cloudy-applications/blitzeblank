@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <title>Ladenreinigung | Blitzeblank Gebäudemanagement</title>
+  <meta name="description" content="Ladenreinigung, Gewerbeflächenreinigung, Reinigungsfirma">
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
@@ -274,6 +275,7 @@
 
     .sign-in h1 {
       color: #38b6ff;
+      font-size: 2em;
     }
 
     .sign-in .beschreibung {
@@ -292,8 +294,9 @@
       z-index: 1;
     }
 
-    .sign-up h1 {
+    .sign-up h2 {
       color: #38b6ff;
+      font-size: 2em;
     }
 
     .container.active .sign-up {
@@ -328,6 +331,11 @@
       transition: all 0.6s ease-in-out;
       border-radius: 150px 0 0 100px;
       z-index: 1000;
+    }
+
+    .toggle-container h3 {
+      color: #ffff;
+      font-size: 2em;
     }
 
     .container.active .toggle-container {
@@ -628,7 +636,7 @@
   <div class="nav">
     <div class="logo">
       <a href="index.html">
-        <img src="Images/1.png" />
+        <img src="Images/1.png" alt="Blitzeblank Logo"/>
       </a>
     </div>
     <div class="buchen">
@@ -651,7 +659,7 @@
       <div class="form-container sign-up">
         <form action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" value="b5a06dce-b120-447f-9aab-afa9a7d714d7" />
-          <h1>Kontaktformular</h1>
+          <h2>Kontaktformular</h2>
           <input type="text" placeholder="Vorname" name="vorname" required />
           <input type="text" placeholder="Name" name="nachname" required />
           <input type="email" name="email" placeholder="Email" required />
@@ -663,7 +671,7 @@
       </div>
       <div class="form-container sign-in">
         <form>
-          <img src="Images/Ladenreinigung.jpg" />
+          <img src="Images/Ladenreinigung.jpg" alt="Supermarkt Obst und Gemüseregale"/>
           <i class="fa-solid fa-building" style="display: none"></i>
           <h1>Ladenreinigung</h1>
           <p class="beschreibung">
@@ -674,7 +682,7 @@
       <div class="toggle-container">
         <div class="toggle">
           <div class="toggle-panel toggle-left">
-            <h1>Unverbindlich Kontakt aufnehmen!</h1>
+            <h3>Unverbindlich Kontakt aufnehmen!</h3>
             <p>
               Nutzen Sie dafür einfach unser Kontaktformular oder rufen Sie
               uns an! Unser Team freut sich auf Sie! Gerne beantworten wir
@@ -683,7 +691,7 @@
             <button class="hidden" id="login">Zurück</button>
           </div>
           <div class="toggle-panel toggle-right">
-            <h1>Jetzt Anfragen!</h1>
+            <h3>Jetzt Anfragen!</h3>
             <p></p>
             <button class="hidden" id="register">Buchen</button>
           </div>
@@ -692,7 +700,7 @@
     </div>
   </div>
   <div class="mobile-view">
-    <img src="Images/Ladenreinigung.jpg" />
+    <img src="Images/Ladenreinigung.jpg" alt="Supermarkt Obst und Gemüseregale"/>
     <div class="mobcon">
       <div class="circle">
         <i class="fa-solid fa-cart-shopping"></i>      

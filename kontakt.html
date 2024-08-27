@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <meta name="description" content="Kontaktformular, Jetzt Kontaktieren">
   <title>Kontakt | Blitzeblank Gebäudemanagement</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
@@ -272,7 +273,7 @@
       border-radius: 20px;
     }
 
-    .sign-in h1 {
+    .sign-in h2 {
       text-align: center;
       color: #38b6ff;
     }
@@ -352,6 +353,12 @@
       border-radius: 150px 0 0 100px;
       z-index: 1000;
     }
+
+    .toggle-container h3 {
+      color: #ffff;
+      font-size: 2em;
+    }
+
 
     .container.active .toggle-container {
       transform: translateX(-100%);
@@ -651,7 +658,7 @@
   <div class="nav">
     <div class="logo">
       <a href="index.html">
-        <img src="Images/1.png" />
+        <img src="Images/1.png" alt="Blitzeblank Logo"/>
       </a>
     </div>
     <div class="buchen">
@@ -686,9 +693,9 @@
       </div>
       <div class="form-container sign-in">
         <form>
-          <img src="Images/teppichbodenreinigung.jpg">
+          <img src="Images/teppichbodenreinigung.jpg" alt="Teppichboden wird gesaugt">
           <i class="fa-solid fa-building" style="display: none"></i>
-          <h1>Überzeugen Sie sich selbst!</h1>
+          <h2>Überzeugen Sie sich selbst!</h2>
           <p class="beschreibung">
             Entdecken Sie die Qualität unserer Dienstleistungen und nehmen Sie
             Kontakt mit uns auf, um Ihr Reinigungsprojekt in die besten Hände zu
@@ -702,7 +709,7 @@
       <div class="toggle-container">
         <div class="toggle">
           <div class="toggle-panel toggle-left">
-            <h1>Unverbindlich Kontakt aufnehmen!</h1>
+            <h3>Unverbindlich Kontakt aufnehmen!</h3>
             <p>
               Nutzen Sie dafür einfach unser Kontaktformular oder rufen Sie
               uns an! Unser Team freut sich auf Sie! Gerne beantworten wir
@@ -711,7 +718,7 @@
             <button class="hidden" id="login">Zurück</button>
           </div>
           <div class="toggle-panel toggle-right">
-            <h1>Jetzt Anfragen!</h1>
+            <h3>Jetzt Anfragen!</h3>
             <p></p>
             <button class="hidden" id="register">Buchen</button>
           </div>
@@ -720,7 +727,7 @@
     </div>
   </div>
   <div class="mobile-view">
-    <img src="Images/teppichbodenreinigung.jpg" />
+    <img src="Images/teppichbodenreinigung.jpg" alt="Teppichboden wird gesaugt"/>
     <div class="mobcon">
       <div class="circle">
         <i class="fa-solid fa-spray-can-sparkles"></i>
